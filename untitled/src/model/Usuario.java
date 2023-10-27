@@ -32,6 +32,4 @@ public class Usuario {
     public Agenda getAgenda() {
         return agenda;
     }
-
-
 }
