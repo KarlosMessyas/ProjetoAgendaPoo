@@ -11,7 +11,7 @@ public class Agenda {
     }
 
     public boolean adicionar(Contato contato){
-        return contatos.add(contato);
+        return contatos.contains(contato)?false:contatos.add(contato);
     }
 
 
