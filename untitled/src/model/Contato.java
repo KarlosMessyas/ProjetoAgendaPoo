@@ -1,8 +1,9 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Contato implements Comparable<Contato>{
+public class Contato implements Comparable<Contato>, Serializable {
     private String nome;
     private String email;
     private String telefone;

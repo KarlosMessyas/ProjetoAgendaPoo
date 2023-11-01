@@ -1,13 +1,14 @@
 package model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-public class Agenda {
+public class Agenda implements Serializable {
+    private static final long serialVersionUID = 1L;
     private List<Contato> contatos;
-
     public Agenda(){
         contatos = new ArrayList<>();
     }
