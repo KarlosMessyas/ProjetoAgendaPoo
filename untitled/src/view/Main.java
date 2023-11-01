@@ -1,20 +1,34 @@
 package view;
+import java.io.*;
+
 import model.Contato;
 import model.Usuario;
 
+import javax.swing.plaf.synth.SynthOptionPaneUI;
+import java.io.File;
+import java.util.List;
+
 public class Main {
     public static void main(String[] args) {
-        Usuario usuario = new Usuario("joao@gmail.com", "123456");
-        Contato maria = new Contato("Maria", "maria@gmail.com", "5451");
-        usuario.getAgenda().adicionar(maria);
-        Contato paulo = new Contato("Paulo", "paulo@gmail.com", "9815");
-        usuario.getAgenda().adicionar(paulo);
-        usuario.getAgenda().adicionar(new Contato("Lacerda", "lacerda@gmail.com", "7845"));
+        File file = new File("teste.txt");
+        List<String> lista = List.of("João", "Maria", "Pedro");
+        if (!file.exists()){
+            try {
+                file.createNewFile();
+            }
+            catch (IOException exception){
+                System.out.println("Falha ao criar arquivo!");
+            }
+        }
 
-        System.out.println(usuario.getAgenda().getContatos());
-        usuario.getAgenda().atualizar(paulo, new Contato("Paulo Jesus", "paulo@gmail.com", "9815"));
-        usuario.getAgenda().remover(maria);
-        System.out.println(usuario.getAgenda().getContatos());
+        try {
+            ObjectOutputStream out = new ObjectOutputStream(
+                    new FileOutputStream(file));
+                    out.writeObject(lista);
+        }
+        catch (IOException exception){
+            System.out.println("Falha ao criar arquivo!");
+        }
 
     }
 }
