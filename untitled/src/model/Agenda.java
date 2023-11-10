@@ -1,10 +1,7 @@
 package model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Agenda implements Serializable {
     private static final long serialVersionUID = 1L;
@@ -45,5 +42,18 @@ public class Agenda implements Serializable {
         return "Agenda{" +
                 "contatos=" + contatos +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Agenda agenda = (Agenda) o;
+        return Objects.equals(contatos, agenda.contatos);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(contatos);
     }
 }

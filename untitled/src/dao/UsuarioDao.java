@@ -4,6 +4,7 @@ import model.Usuario;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class UsuarioDao {
     private File file;
@@ -51,8 +52,45 @@ public class UsuarioDao {
 
     public boolean addUsuario(Usuario usuario){
         List<Usuario> usuarios = listarUsuarios();
+        Usuario usuarioAdd = usuario;
 
-        if (usuarios.add(usuario)) {
+        for (Usuario usuario1 : usuarios){
+            if (usuarioAdd.getEmail().equals(usuario1.getEmail())){
+                return false;
+            }
+        }
+        usuarios.add(usuarioAdd);
+        atualizarArquivo(usuarios);
+        return true;
+    }
+
+    public boolean deletarUsuario(Usuario usuario){
+        List<Usuario> usuarios = listarUsuarios();
+
+        if (usuarios.remove(usuario)) {
+            atualizarArquivo(usuarios);
+            return true;
+        }
+        return false;
+    }
+
+    public Usuario buscarPorEmail(String email){
+        List<Usuario> usuarios = listarUsuarios(); //Leitura do arquivo
+
+        for(Usuario usuario : usuarios){
+            if(usuario.getEmail().equals(email)){
+                return usuario;
+            }
+        }
+        return null;
+    }
+
+    public boolean atualizar(Usuario usuario){
+        Usuario usuario1 = buscarPorEmail(usuario.getEmail());
+        if(usuario1 != null){
+            List<Usuario> usuarios = listarUsuarios(); //Leitura do arquivo
+            usuarios.remove(usuario1);
+            usuarios.add(usuario);
             atualizarArquivo(usuarios);
             return true;
         }
