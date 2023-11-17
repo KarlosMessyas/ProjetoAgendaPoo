@@ -8,6 +8,7 @@ import java.util.UUID;
 
 public class UsuarioDao {
     private File file;
+
     public UsuarioDao() {
         file = new File("Usuarios");
         File file = new File("teste.txt");
